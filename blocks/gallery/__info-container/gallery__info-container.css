@@ -1,0 +1,9 @@
+.gallery__info-container {
+    background-color: #fff;
+    max-width: 282px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 21px 25px 15px 31px;
+    border-radius: 0 0 10px 10px;
+}

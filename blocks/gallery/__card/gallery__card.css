@@ -1,0 +1,13 @@
+.gallery__card {
+    list-style-type: none;
+}
+
+@media screen and (max-width: 960px) {
+    .gallery__card {
+        margin: 0 auto 20px;
+    }
+
+    .gallery__card:last-child {
+        margin: 0 auto;
+    }
+}
