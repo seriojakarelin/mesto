@@ -1,7 +1,7 @@
 @import url(./__copyright/footer__copyright.css);
 
 .footer {
-    width: calc(882/1280*100%);
+    max-width: 882px;
     margin: 0 auto;
     padding-bottom: 60px;
 }

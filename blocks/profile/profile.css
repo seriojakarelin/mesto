@@ -8,7 +8,7 @@
 @import url(./__add-logo/profile__add-logo.css);
 
 .profile {
-    width: calc(882/1280*100%);
+    max-width: 882px;
     margin: 0 auto;
     padding: 40px 0 0;
     display: flex;
