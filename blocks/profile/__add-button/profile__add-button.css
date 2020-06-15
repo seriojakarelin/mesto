@@ -4,6 +4,7 @@
     height: 50px;
     border: 1px solid #fff;
     margin-left: auto;
+    outline: none;
 }
 
 @media screen and (max-width: 960px) {

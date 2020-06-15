@@ -3,7 +3,6 @@
     display: grid;
     grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
     grid-gap: 0px 10px;
-    justify-content: center;
 }
 
 @media screen and (max-width: 960px) {

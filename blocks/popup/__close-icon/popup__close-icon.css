@@ -5,3 +5,10 @@
     left: 100%;
     top: -10%;
 }
+
+@media screen and (max-width: 960px) {
+    .popup__close-icon {
+        left: 45%;
+        top: -15%;
+    }
+}
