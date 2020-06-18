@@ -5,6 +5,15 @@
     border: 1px solid #fff;
     margin-left: auto;
     outline: none;
+    flex: none;
+    padding: 0;
+    outline: none;
+    background-image: url(../../../images/add__button.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
+    border: 1px solid #fff;
+    outline: none;
 }
 
 @media screen and (max-width: 960px) {

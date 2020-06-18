@@ -2,7 +2,7 @@
 @import url(./__photo/gallery__photo.css);
 @import url(./__info-container/gallery__info-container.css);
 @import url(./__photo-title/gallery__photo-title.css);
-@import url(./__like-logo/gallery__like-logo.css);
+@import url(./__like-button/gallery__like-button.css);
 
 .gallery {
     max-width: 882px;

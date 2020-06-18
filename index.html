@@ -18,14 +18,10 @@
                 <img class="profile__avatar" src="./images/custeau.jpg" alt="Фото Жака-Ива Кусто">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button class="button profile__edit-button">
-                        <img class="profile__edit-logo" src="./images/edit__button.svg" alt="Лого кнопки редактирования">
-                    </button>
+                    <button class="button profile__edit-button" type="button"></button>
                     <p class="profile__job">Исследователь океана</p>
                 </div>
-                <button class="button profile__add-button">
-                    <img class="profile__add-logo" src="./images/add__button.png" alt="Лого кнопки добавления фото">
-                </button>
+                <button class="button profile__add-button" type="submit"></button>
             </section>
 
             <ul class="gallery">
@@ -35,7 +31,7 @@
                         <h2 class="gallery__photo-title">
                             Карачаевск
                         </h2>
-                        <img class="gallery__like-logo" src="./images/like__logo.svg" alt="Лого для отметки нравится">
+                        <button class="gallery__like-button button" type="submit"></button>
                     </div>
                 </li>
                 <li class="gallery__card">
@@ -44,7 +40,7 @@
                         <h2 class="gallery__photo-title">
                             Гора Эльбрус
                         </h2>
-                        <img class="gallery__like-logo" src="./images/like__logo.svg" alt="Лого для отметки нравится">
+                        <button class="gallery__like-button button" type="submit"></button>
                     </div>
                 </li>
                 <li class="gallery__card">
@@ -53,7 +49,7 @@
                         <h2 class="gallery__photo-title">
                             Домбай
                         </h2>
-                        <img class="gallery__like-logo" src="./images/like__logo.svg" alt="Лого для отметки нравится">
+                        <button class="gallery__like-button button" type="submit"></button>
                     </div>
                 </li>
                 <li class="gallery__card">
@@ -62,7 +58,7 @@
                         <h2 class="gallery__photo-title">
                             Камчатка
                         </h2>
-                        <img class="gallery__like-logo" src="./images/like__logo.svg" alt="Лого для отметки нравится">
+                        <button class="gallery__like-button button" type="submit"></button>
                     </div>
                 </li>
                 <li class="gallery__card">
@@ -71,7 +67,7 @@
                         <h2 class="gallery__photo-title">
                             Владивосток
                         </h2>
-                        <img class="gallery__like-logo" src="./images/like__logo.svg" alt="Лого для отметки нравится">
+                        <button class="gallery__like-button button" type="submit"></button>
                     </div>
                 </li>
                 <li class="gallery__card">
@@ -80,7 +76,7 @@
                         <h2 class="gallery__photo-title">
                             Горы Хибины
                         </h2>
-                        <img class="gallery__like-logo" src="./images/like__logo.svg" alt="Лого для отметки нравится">
+                        <button class="gallery__like-button button" type="submit"></button>
                     </div>
                 </li>
             </ul>
@@ -95,11 +91,11 @@
 
         <section class="popup">
             <div class="popup__container">
-                <img class="button popup__close-icon" src="./images/close__icon.svg" alt="Закрывающая иконка">
+                <button class="popup__close-button button" type="button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__forms">
-                    <input type="text" class="popup__input popup__input_el_name">
-                    <input type="text" class="popup__input popup__input_el_job">
+                <form class="popup__forms" name="popup-forms">
+                    <input type="text" class="popup__input popup__input_el_name" name="user-name">
+                    <input type="text" class="popup__input popup__input_el_job" name="user-job">
                     <button class="popup__submit-button" type="submit">Сохранить</button>
                 </form>
             </div>
