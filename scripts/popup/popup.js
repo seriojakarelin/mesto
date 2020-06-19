@@ -8,13 +8,12 @@ const profileJob = document.querySelector('.profile__job');
 const popupForms = document.querySelector('.popup__forms');
 
 function popupToggle() {
-    if (popup.classList.contains('popup_opened')) {    
-        popup.classList.toggle('popup_opened');
-    } else {
-        popup.classList.toggle('popup_opened')
+    if (!popup.classList.contains('popup_opened')) {    
         popupInputElName.value = profileName.textContent;
         popupInputElJob.value = profileJob.textContent;
     }
+
+    popup.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler(evt) {
