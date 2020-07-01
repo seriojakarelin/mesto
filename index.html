@@ -24,62 +24,7 @@
                 <button class="button profile__add-button" type="button"></button>
             </section>
 
-            <ul class="gallery">
-                <li class="gallery__card">
-                    <img class="gallery__photo" src="./images/gallery__karachaevsk.jpg" alt="Фото древнего здания в Карачаевске">
-                    <div class="gallery__info-container">
-                        <h2 class="gallery__photo-title">
-                            Карачаевск
-                        </h2>
-                        <button class="gallery__like-button button" type="button"></button>
-                    </div>
-                </li>
-                <li class="gallery__card">
-                    <img class="gallery__photo" src="./images/gallery__elbrus.jpg" alt="Фото горы Эльбрус">
-                    <div class="gallery__info-container">
-                        <h2 class="gallery__photo-title">
-                            Гора Эльбрус
-                        </h2>
-                        <button class="gallery__like-button button" type="button"></button>
-                    </div>
-                </li>
-                <li class="gallery__card">
-                    <img class="gallery__photo" src="./images/gallery__dombay.jpg" alt="Фото горной вершины на Домбае">
-                    <div class="gallery__info-container">
-                        <h2 class="gallery__photo-title">
-                            Домбай
-                        </h2>
-                        <button class="gallery__like-button button" type="button"></button>
-                    </div>
-                </li>
-                <li class="gallery__card">
-                    <img class="gallery__photo" src="./images/gallery__kamchatka.jpg" alt="Фото серферов на Камчатке">
-                    <div class="gallery__info-container">
-                        <h2 class="gallery__photo-title">
-                            Камчатка
-                        </h2>
-                        <button class="gallery__like-button button" type="button"></button>
-                    </div>
-                </li>
-                <li class="gallery__card">
-                    <img class="gallery__photo" src="./images/gallery__vladivostok.jpg" alt="Фото маяка во Владивостоке">
-                    <div class="gallery__info-container">
-                        <h2 class="gallery__photo-title">
-                            Владивосток
-                        </h2>
-                        <button class="gallery__like-button button" type="button"></button>
-                    </div>
-                </li>
-                <li class="gallery__card">
-                    <img class="gallery__photo" src="./images/gallery__khibiny.jpg" alt="Фото горного хребта в Хибинах">
-                    <div class="gallery__info-container">
-                        <h2 class="gallery__photo-title">
-                            Горы Хибины
-                        </h2>
-                        <button class="gallery__like-button button" type="button"></button>
-                    </div>
-                </li>
-            </ul>
+            <ul class="gallery"></ul>
 
         </main>
 
@@ -89,19 +34,53 @@
             </p>
         </footer>
 
-        <section class="popup">
-            <div class="popup__container">
-                <button class="popup__close-button button" type="button"></button>
+        <section class="popup popup_type_edit">
+            <div class="popup__container_type_edit popup__container">
+                <button class="popup__close-button popup__close-button_type_edit button" type="button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__forms" name="popup-forms">
+                <form class="popup__forms popup__forms_type_edit" name="popup-forms">
                     <input type="text" class="popup__input popup__input_el_name" name="user-name">
                     <input type="text" class="popup__input popup__input_el_job" name="user-job">
-                    <button class="popup__submit-button" type="submit">Сохранить</button>
+                    <button class="popup__submit-button popup__submit-button_type_edit" type="submit">Сохранить</button>
                 </form>
             </div>
         </section>
 
+        <section class="popup popup_type_add">
+            <div class="popup__container_type_add popup__container">
+                <button class="popup__close-button popup__close-button_type_add button" type="button"></button>
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__forms popup__forms_type_add" name="popup-forms">
+                    <input type="text" class="popup__input popup__input_el_place-name" name="place-name" placeholder="Название">
+                    <input type="url" class="popup__input popup__input_el_place-url" name="place-url" placeholder="Ссылка на картинку">
+                    <button class="popup__submit-button popup__submit-button_type_add" type="submit">Создать</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="popup popup_type_view">
+            <div class="popup__container popup__container_type_view">
+                <button class="popup__close-button popup__close-button_type_view button" type="button"></button>
+                <img alt="Картинка из галлереи mesto" class="popup__photo">
+                <p class="popup__photo-caption"></p>
+            </div>
+        </section>
+
     </div>
-    <script src="./scripts/popup/popup.js"></script>
+
+    <template class="card-template">
+
+        <li class="gallery__card">
+            <button class="gallery__trash-button button" type="button"></button>
+            <img class="gallery__photo" alt="Фото в ленте mesto">
+            <div class="gallery__info-container">
+                <h2 class="gallery__photo-title"></h2>
+                <button class="gallery__like-button button" type="button"></button>
+            </div>
+        </li>
+        
+    </template>
+
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

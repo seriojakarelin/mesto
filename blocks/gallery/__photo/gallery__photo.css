@@ -1,25 +1,8 @@
 .gallery__photo {
     width: 282px;
-    max-height: 282px;
+    height: 282px;
     object-fit: cover;
     object-position: center;
     display: block;
 }
 
-@media screen and (max-width: 1279px) {
-    .gallery__photo {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 1199px) {
-    .gallery__photo {
-        width: 282px;
-    }
-}
-
-@media screen and (max-width: 319px) {
-    .gallery__photo {
-        width: 100%;
-    }
-}
