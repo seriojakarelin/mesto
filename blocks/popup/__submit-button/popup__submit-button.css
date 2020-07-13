@@ -11,6 +11,7 @@
     transition: opacity 0.4s linear;
     display: block;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .popup__submit-button:hover {

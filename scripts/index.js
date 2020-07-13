@@ -16,6 +16,7 @@ const cardsContainer = document.querySelector('.gallery');
 const cardTemplate = document.querySelector('.card-template');
 const popupView = document.querySelector('.popup_type_view');
 const popupViewCloseButton = document.querySelector('.popup__close-button_type_view');
+const popupElement = document.querySelector('.popup');
 
 function popupToggle(popup) {
     popup.classList.toggle('popup_opened');
