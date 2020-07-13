@@ -1,7 +1,7 @@
 .popup__input {
     width: calc((358/430)*100%);
     display: block;
-    margin: 0 auto 29.74px;
+    margin: 0 auto 30px;
     outline: none; 
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -11,6 +11,4 @@
     color: #000;
 }
 
-.popup__input:nth-child(2n) {
-    margin-bottom: 0;
-}
+

@@ -1,52 +1,61 @@
-function showInputError(formElement, inputElement, errorMessage) {
+function showInputError({formElement, inputElement, errorMessage, inputErrorClass, errorClass, ...rest}) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add('popup__input_type_error');
-    errorElement.classList.add('popup__input-error_active');
+    inputElement.classList.add(inputErrorClass);
+    errorElement.classList.add(errorClass);
     errorElement.textContent = errorMessage;
 } 
 
-function hideInputError(formElement, inputElement) {
+function hideInputError({formElement, inputElement, inputErrorClass, errorClass, ...rest}) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove('popup__input_type_error')
-    errorElement.classList.remove('popup__input-error_active');
+    inputElement.classList.remove(inputErrorClass)
+    errorElement.classList.remove(errorClass);
     errorElement.textContent = '';
 } 
 
-function checkInputValidity(formElement, inputElement) {
+function checkInputValidity({formElement, inputElement, ...rest}) {
     if (!inputElement.validity.valid) {
-        showInputError(formElement, inputElement, inputElement.validationMessage);
+        const errorMessage = inputElement.validationMessage;
+        showInputError({formElement, inputElement, errorMessage, ...rest});
     }else {
-        hideInputError(formElement, inputElement);
+        hideInputError({formElement, inputElement, ...rest});
     }
 }
 
-function setEventListeners(formElement) {
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    const buttonElement = formElement.querySelector('.popup__submit-button');
+function setEventListeners({formElement, inputSelector, submitButtonSelector, ...rest}) {
+    const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+    const buttonElement = formElement.querySelector(submitButtonSelector);
 
-    toggleButtonState(inputList, buttonElement);
+    toggleButtonState({inputList, buttonElement, ...rest});
 
     inputList.forEach(function(inputElement) {
         inputElement.addEventListener('input', function() {
-            checkInputValidity(formElement, inputElement);
-            toggleButtonState(inputList, buttonElement);
+            checkInputValidity({formElement, inputElement, ...rest});
+            toggleButtonState({inputList, buttonElement, ...rest});
         })
     })
 }
 
-function enableValidation() {
-    const formList = Array.from(document.querySelectorAll('.popup__forms'));
+function enableValidation({formSelector, ...rest}) {
+
+    const formList = Array.from(document.querySelectorAll(formSelector));
 
     formList.forEach(function(formElement) {
         formElement.addEventListener('submit', function(evt) {
             evt.preventDefault();
         })
 
-        setEventListeners(formElement);
+        setEventListeners({formElement, ...rest});
     })
 }
 
-enableValidation();
+enableValidation({
+    formSelector: '.popup__forms',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+  });
 
 function hasInvalidInput(inputList) {
     return inputList.some(function(inputElement) {
@@ -54,10 +63,12 @@ function hasInvalidInput(inputList) {
     })
 }
 
-function toggleButtonState(inputList, buttonElement) {
+function toggleButtonState({inputList, buttonElement, inactiveButtonClass, ...rest}) {
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add('popup__submit-button_inactive');
+        buttonElement.classList.add(inactiveButtonClass);
+        buttonElement.setAttribute('disabled', true);
     }else {
-        buttonElement.classList.remove('popup__submit-button_inactive');
+        buttonElement.classList.remove(inactiveButtonClass);
+        buttonElement.removeAttribute('disabled', true);
     }
 }

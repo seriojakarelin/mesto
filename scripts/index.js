@@ -16,11 +16,37 @@ const cardsContainer = document.querySelector('.gallery');
 const cardTemplate = document.querySelector('.card-template');
 const popupView = document.querySelector('.popup_type_view');
 const popupViewCloseButton = document.querySelector('.popup__close-button_type_view');
-const popupElement = document.querySelector('.popup');
 
 function popupToggle(popup) {
     popup.classList.toggle('popup_opened');
     document.activeElement.blur();
+    resetError(popup);
+}
+
+function resetError(popup) {
+    if (!popup.classList.contains('popup_opened')) { 
+        const errorMessages = popup.querySelectorAll('.popup__input-error_active')
+        const inputErrors = popup.querySelectorAll('.popup__input_type_error')
+        if (errorMessages === null && inputErrors === null) {
+            return;
+        }
+
+        errorMessages.forEach(function(errorMessage) {
+            errorMessage.classList.remove('popup__input-error_active');
+        })
+
+        inputErrors.forEach(function(inputError) {
+            inputError.classList.remove('popup__input_type_error');
+        })
+    }
+}
+
+function popupClosingByOverlay(evt) {
+    const popup = document.querySelector('.popup_opened')
+    if (evt.target !== evt.currentTarget) {
+        return;
+    } 
+    popupToggle(popup);
 }
 
 function handleEditPopup() {
@@ -111,9 +137,20 @@ function formAddSubmitHandler(evt) {
     handleAddPopup();
 }
 
+function popupCloseByEsc(evt) {
+    const popup = document.querySelector('.popup_opened');
+    if (popup !== null && evt.code === 'Escape') {
+        popupToggle(popup);
+      }
+}
+
+document.querySelectorAll('.popup').forEach(function(popup) {
+    popup.addEventListener('click', popupClosingByOverlay);
+})
 profileEditButton.addEventListener('click', handleEditPopup);
 popupEditCloseButton.addEventListener('click', handleEditPopup);
 popupFormsEdit.addEventListener('submit', formEditSubmitHandler);
 profileAddButton.addEventListener('click', handleAddPopup);
 popupAddCloseButton.addEventListener('click', handleAddPopup);
 popupFormsAdd.addEventListener('submit', formAddSubmitHandler);
+document.addEventListener('keydown', popupCloseByEsc);
