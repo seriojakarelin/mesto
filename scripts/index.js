@@ -18,10 +18,12 @@ const popupView = document.querySelector('.popup_type_view');
 const popupViewCloseButton = document.querySelector('.popup__close-button_type_view');
 
 function popupToggle(popup) {
+    const buttonElement = popup.querySelector('.popup__submit-button');
+    const inactiveButtonClass = 'popup__submit-button_inactive';
     popup.classList.toggle('popup_opened');
     document.activeElement.blur();
     resetError(popup);
-    blockSubmitButton(popup);
+    toggleButtonState(true, buttonElement, inactiveButtonClass);
 
     if(popup.classList.contains('popup_opened')) {  
         document.addEventListener('keydown', popupCloseByEsc);
