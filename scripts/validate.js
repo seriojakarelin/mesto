@@ -1,13 +1,13 @@
-function showInputError({formElement, inputElement, errorMessage, inputErrorClass, errorClass, ...rest}) {
+function showInputError({formElement, inputElement, errorMessage, inputErrorClass, errorClass}) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(inputErrorClass);
     errorElement.classList.add(errorClass);
     errorElement.textContent = errorMessage;
 } 
 
-function hideInputError({formElement, inputElement, inputErrorClass, errorClass, ...rest}) {
+function hideInputError({formElement, inputElement, inputErrorClass, errorClass}) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(inputErrorClass)
+    inputElement.classList.remove(inputErrorClass);
     errorElement.classList.remove(errorClass);
     errorElement.textContent = '';
 } 
@@ -63,7 +63,7 @@ function hasInvalidInput(inputList) {
     })
 }
 
-function toggleButtonState({inputList, buttonElement, inactiveButtonClass, ...rest}) {
+function toggleButtonState({inputList, buttonElement, inactiveButtonClass}) {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(inactiveButtonClass);
         buttonElement.setAttribute('disabled', true);
@@ -71,4 +71,30 @@ function toggleButtonState({inputList, buttonElement, inactiveButtonClass, ...re
         buttonElement.classList.remove(inactiveButtonClass);
         buttonElement.removeAttribute('disabled', true);
     }
+}
+
+function resetError(popup) {
+    if (!popup.classList.contains('popup_opened')) { 
+        const errorMessages = popup.querySelectorAll('.popup__input-error_active');
+        const inputErrors = popup.querySelectorAll('.popup__input_type_error');
+        if (errorMessages === null && inputErrors === null) {
+            return;
+        }
+
+        errorMessages.forEach(function(errorMessage) {
+            errorMessage.classList.remove('popup__input-error_active');
+        })
+
+        inputErrors.forEach(function(inputError) {
+            inputError.classList.remove('popup__input_type_error');
+        })
+    }
+}
+
+function blockSubmitButton(popup) {
+    if (!popup.classList.contains('popup_opened') && !popup.classList.contains('popup_type_view')) { 
+        const button = popup.querySelector('.popup__submit-button');
+        button.classList.add('popup__submit-button_inactive');
+        button.setAttribute('disabled', true);
+        }
 }

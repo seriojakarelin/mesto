@@ -21,28 +21,17 @@ function popupToggle(popup) {
     popup.classList.toggle('popup_opened');
     document.activeElement.blur();
     resetError(popup);
-}
+    blockSubmitButton(popup);
 
-function resetError(popup) {
-    if (!popup.classList.contains('popup_opened')) { 
-        const errorMessages = popup.querySelectorAll('.popup__input-error_active')
-        const inputErrors = popup.querySelectorAll('.popup__input_type_error')
-        if (errorMessages === null && inputErrors === null) {
-            return;
-        }
-
-        errorMessages.forEach(function(errorMessage) {
-            errorMessage.classList.remove('popup__input-error_active');
-        })
-
-        inputErrors.forEach(function(inputError) {
-            inputError.classList.remove('popup__input_type_error');
-        })
+    if(popup.classList.contains('popup_opened')) {  
+        document.addEventListener('keydown', popupCloseByEsc);
+    }else {
+        document.removeEventListener('keydown', popupCloseByEsc);
     }
 }
 
 function popupClosingByOverlay(evt) {
-    const popup = document.querySelector('.popup_opened')
+    const popup = document.querySelector('.popup_opened');
     if (evt.target !== evt.currentTarget) {
         return;
     } 
@@ -153,4 +142,3 @@ popupFormsEdit.addEventListener('submit', formEditSubmitHandler);
 profileAddButton.addEventListener('click', handleAddPopup);
 popupAddCloseButton.addEventListener('click', handleAddPopup);
 popupFormsAdd.addEventListener('submit', formAddSubmitHandler);
-document.addEventListener('keydown', popupCloseByEsc);
