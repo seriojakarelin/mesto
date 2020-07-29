@@ -1,3 +1,5 @@
+import {FormValidator} from './FormValidator.js'
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -24,3 +26,39 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupAdd = document.querySelector('.popup_type_add');
+const popupFormsEdit = document.querySelector('.popup__forms_type_edit');
+const popupFormsAdd = document.querySelector('.popup__forms_type_add');
+
+const popupEditValidator = new FormValidator(popupFormsEdit, popupEdit);
+const popupAddValidator = new FormValidator(popupFormsAdd, popupAdd);
+
+function popupOpen(popup) {
+    popup.classList.add('popup_opened');
+    document.activeElement.blur();
+    popupEditValidator.enableValidation();
+    popupAddValidator.enableValidation();
+    popupEditValidator.toggleButtonState(true);
+    popupAddValidator.toggleButtonState(true);
+
+    document.addEventListener('keydown', popupCloseByEsc);
+}
+
+function popupClose(popup) {
+    popup.classList.remove('popup_opened');
+    popupEditValidator.resetError();
+    popupAddValidator.resetError();
+
+    document.removeEventListener('keydown', popupCloseByEsc);
+}
+
+function popupCloseByEsc(evt) {
+    const popup = document.querySelector('.popup_opened');
+    if (popup !== null && evt.code === 'Escape') {
+        popupClose(popup);
+      }
+}
+
+export {initialCards, popupCloseByEsc, popupClose, popupOpen, popupEditValidator, popupAddValidator, popupEdit, popupAdd, popupFormsEdit, popupFormsAdd};
