@@ -62,14 +62,14 @@ popupViewCloseButton.addEventListener('click', function() {
     popupClose(popupView);
 });
 
-function addCard(item) {
+function createCard(item) {
     const card = new Card(item.link, item.name, '.card-template');
 
     return card.generateTemplate();
 }
 
 function renderCard(item) {
-    const card = addCard(item);
+    const card = createCard(item);
     cardsContainer.prepend(card);
 }
 

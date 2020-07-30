@@ -17,6 +17,7 @@ class Card {
 
         this._element.querySelector('.gallery__photo').src = this._image;
         this._element.querySelector('.gallery__photo-title').textContent = this._title;
+        this._element.querySelector('.gallery__photo').alt = this._title;
 
         return this._element;
     }

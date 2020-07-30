@@ -1,11 +1,11 @@
 class FormValidator {
-    constructor(formElement, popup) {
-        this._formSelector = '.popup__forms';
-        this._inputSelector = '.popup__input';
-        this._submitButtonSelector = '.popup__submit-button';
-        this._inactiveButtonClass = 'popup__submit-button_inactive';
-        this._inputErrorClass = 'popup__input_type_error';
-        this._errorClass = 'popup__input-error_active';
+    constructor(formElement, popup, {formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) {
+        this._formSelector = formSelector;
+        this._inputSelector = inputSelector;
+        this._submitButtonSelector = submitButtonSelector;
+        this._inactiveButtonClass = inactiveButtonClass;
+        this._inputErrorClass = inputErrorClass;
+        this._errorClass = errorClass;
         this._formElement = formElement;
         this._inputElements = this._formElement.querySelectorAll(this._inputSelector);
         this._popup = popup;

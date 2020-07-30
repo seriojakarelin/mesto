@@ -31,9 +31,17 @@ const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupFormsEdit = document.querySelector('.popup__forms_type_edit');
 const popupFormsAdd = document.querySelector('.popup__forms_type_add');
+const formSelectors = {
+    formSelector: '.popup__forms',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+}
 
-const popupEditValidator = new FormValidator(popupFormsEdit, popupEdit);
-const popupAddValidator = new FormValidator(popupFormsAdd, popupAdd);
+const popupEditValidator = new FormValidator(popupFormsEdit, popupEdit, formSelectors);
+const popupAddValidator = new FormValidator(popupFormsAdd, popupAdd, formSelectors);
 
 function popupOpen(popup) {
     popup.classList.add('popup_opened');
