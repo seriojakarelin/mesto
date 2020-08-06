@@ -1,5 +1,6 @@
 import {initialCards, popupClose, popupOpen, popupEdit, popupAdd, popupFormsEdit, popupFormsAdd} from './utils.js';
 import {Card} from './Card.js';
+import {Section} from './Section.js';
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupEditCloseButton = document.querySelector('.popup__close-button_type_edit');
@@ -62,18 +63,17 @@ popupViewCloseButton.addEventListener('click', function() {
     popupClose(popupView);
 });
 
-function createCard(item) {
-    const card = new Card(item.link, item.name, '.card-template');
+const cardList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const card = new Card(item.link, item.name, '.card-template');
+        const cardElement = card.generateTemplate();
 
-    return card.generateTemplate();
-}
+        return cardElement;
+    }
+}, cardsContainer);
 
-function renderCard(item) {
-    const card = createCard(item);
-    cardsContainer.prepend(card);
-}
-
-initialCards.forEach(renderCard);
+cardList.renderItems();
 
 function formAddSubmitHandler(evt) {
     evt.preventDefault();
@@ -83,7 +83,7 @@ function formAddSubmitHandler(evt) {
         link: popupInputElPlaceUrl.value
     }
 
-    renderCard(item);
+    cardList.addItem(item);
 
     handleAddPopupClose();
 }
