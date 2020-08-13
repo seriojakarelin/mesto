@@ -36,7 +36,7 @@ const popupWithFormEdit = new PopupWithForm(
 
         userInfo.setUserInfo(item);
     }
-)
+);
 
 const popupWithFormAdd = new PopupWithForm(
     popupAdd,
@@ -48,13 +48,14 @@ const popupWithFormAdd = new PopupWithForm(
     
         cardList.addItem(item);
     }
-)
+);
 
 profileEditButton.addEventListener('click', () => { 
     popupWithFormEdit.open(userInfo.getUserInfo());
     popupEditValidator.enableValidation();
     popupEditValidator.toggleButtonState(true);
 });
+
 profileAddButton.addEventListener('click', () => {
     popupWithFormAdd.open();
     popupAddValidator.enableValidation();
