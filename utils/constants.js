@@ -1,4 +1,4 @@
-import {FormValidator} from './FormValidator.js'
+import {FormValidator} from '../components/FormValidator.js';
 
 const initialCards = [
     {
@@ -27,6 +27,12 @@ const initialCards = [
     }
 ];
 
+const profileEditButton = document.querySelector('.profile__edit-button');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const profileAddButton = document.querySelector('.profile__add-button');
+const cardsContainer = document.querySelector('.gallery');
+const popupView = document.querySelector('.popup_type_view');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupFormsEdit = document.querySelector('.popup__forms_type_edit');
@@ -43,30 +49,4 @@ const formSelectors = {
 const popupEditValidator = new FormValidator(popupFormsEdit, popupEdit, formSelectors);
 const popupAddValidator = new FormValidator(popupFormsAdd, popupAdd, formSelectors);
 
-function popupOpen(popup) {
-    popup.classList.add('popup_opened');
-    document.activeElement.blur();
-    popupEditValidator.enableValidation();
-    popupAddValidator.enableValidation();
-    popupEditValidator.toggleButtonState(true);
-    popupAddValidator.toggleButtonState(true);
-
-    document.addEventListener('keydown', popupCloseByEsc);
-}
-
-function popupClose(popup) {
-    popup.classList.remove('popup_opened');
-    popupEditValidator.resetError();
-    popupAddValidator.resetError();
-
-    document.removeEventListener('keydown', popupCloseByEsc);
-}
-
-function popupCloseByEsc(evt) {
-    const popup = document.querySelector('.popup_opened');
-    if (popup !== null && evt.code === 'Escape') {
-        popupClose(popup);
-      }
-}
-
-export {initialCards, popupCloseByEsc, popupClose, popupOpen, popupEditValidator, popupAddValidator, popupEdit, popupAdd, popupFormsEdit, popupFormsAdd};
+export {initialCards, popupEdit, popupAdd, popupFormsEdit, popupFormsAdd, formSelectors, profileName, profileJob, popupView, profileAddButton, profileEditButton, cardsContainer, popupEditValidator, popupAddValidator};

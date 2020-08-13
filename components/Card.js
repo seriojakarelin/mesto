@@ -1,10 +1,9 @@
-import {popupCloseByEsc} from './utils.js'
-
 class Card {
-    constructor(image, title, templateSelector) {
+    constructor(image, title, templateSelector, handleCardClick) {
         this._image = image;
         this._title = title;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -31,11 +30,7 @@ class Card {
     }
 
     _handlePopupViewOpen() {
-        const popupView = document.querySelector('.popup_type_view');
-        popupView.querySelector('.popup__photo').src = this._image; 
-        popupView.querySelector('.popup__photo-caption').textContent = this._title; 
-        popupView.classList.add('popup_opened');
-        document.addEventListener('keydown', popupCloseByEsc);
+        this._handleCardClick();
     }
 
     _setEventListeners() {
