@@ -11,13 +11,13 @@ class Popup {
 
     close() {
         this._popupSelector.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._handleEscClose);
+        document.removeEventListener('keydown', this._handleEscClose.bind(this));
     }
 
     _handleEscClose(evt) {
         if (document.querySelector('.popup_opened') !== null && evt.code === 'Escape') {
             this.close();
-          }
+        }
     }
 
     _handleOverlayClose(evt) {
@@ -37,7 +37,7 @@ class Popup {
             this._handleOverlayClose(evt);
         });
 
-        document.addEventListener('keydown', this._handleEscClose);
+        document.addEventListener('keydown', this._handleEscClose.bind(this));
     }
 }
 
