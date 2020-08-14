@@ -14,9 +14,11 @@ class Card {
         this._element = this._getTemplate();
         this._setEventListeners();
 
-        this._element.querySelector('.gallery__photo').src = this._image;
+        this._imageElement = this._element.querySelector('.gallery__photo');
+
+        this._imageElement.src = this._image;
+        this._imageElement.alt = this._title;
         this._element.querySelector('.gallery__photo-title').textContent = this._title;
-        this._element.querySelector('.gallery__photo').alt = this._title;
 
         return this._element;
     }
@@ -27,6 +29,7 @@ class Card {
 
     _handleTrashButton() {
         this._element.remove();
+        this._element = null;
     }
 
     _handlePopupViewOpen() {

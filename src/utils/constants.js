@@ -46,7 +46,4 @@ const formSelectors = {
     errorClass: 'popup__input-error_active'
 }
 
-const popupEditValidator = new FormValidator(popupFormsEdit, popupEdit, formSelectors);
-const popupAddValidator = new FormValidator(popupFormsAdd, popupAdd, formSelectors);
-
-export {initialCards, popupEdit, popupAdd, popupFormsEdit, popupFormsAdd, formSelectors, profileName, profileJob, popupView, profileAddButton, profileEditButton, cardsContainer, popupEditValidator, popupAddValidator};
+export {initialCards, popupEdit, popupAdd, popupFormsEdit, popupFormsAdd, formSelectors, profileName, profileJob, popupView, profileAddButton, profileEditButton, cardsContainer};

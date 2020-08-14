@@ -12,10 +12,3 @@
     border: none;
     outline: none;
 }
-
-@media screen and (max-width: 960px) {
-    .popup__close-button {
-        left: 47%;
-        top: -51px;
-    }
-}

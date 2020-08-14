@@ -1,10 +1,10 @@
 import {Popup} from './Popup.js';
-import {popupEditValidator, popupAddValidator} from '../utils/constants.js';
 
 class PopupWithForm extends Popup {
-    constructor(popupSelector, formSubmitCallback) {
+    constructor(popupSelector, formSubmitCallback, popupValidator) {
         super(popupSelector);
         this._formSubmitCallback = formSubmitCallback;
+        this._popupValidator = popupValidator;
     }
 
     _getInputValues() {
@@ -28,6 +28,15 @@ class PopupWithForm extends Popup {
         })
     }
 
+    open(formData, prefix) {
+        for (const inputName in formData) {
+            this._popupSelector.querySelector(`.popup__input[name=${prefix}-${inputName}]`).value = formData[inputName];
+        }
+        super.open();
+        this._popupValidator.enableValidation();
+        this._popupValidator.toggleButtonState(true);
+    }
+
     close() {
         const inputs = Array.from(this._popupSelector.querySelectorAll('.popup__input'));
         
@@ -37,8 +46,7 @@ class PopupWithForm extends Popup {
 
         super.close();
 
-        popupEditValidator.resetError();
-        popupAddValidator.resetError();
+        this._popupValidator.resetError();
     }
 
 }
