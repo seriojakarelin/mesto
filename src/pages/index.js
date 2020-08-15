@@ -58,7 +58,7 @@ const popupWithFormAdd = new PopupWithForm(
 );
 
 profileEditButton.addEventListener('click', () => { 
-    popupWithFormEdit.open(userInfo.getUserInfo(), "user");
+    popupWithFormEdit.open(userInfo.getUserInfo(), 'user');
 });
 
 profileAddButton.addEventListener('click', () => {
