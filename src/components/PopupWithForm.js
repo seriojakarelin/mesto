@@ -30,7 +30,9 @@ class PopupWithForm extends Popup {
 
     open(formData, prefix) {
         for (const inputName in formData) {
+            if(this._popupSelector.querySelector(`.popup__input[name=${prefix}-${inputName}]`) !== null) {
             this._popupSelector.querySelector(`.popup__input[name=${prefix}-${inputName}]`).value = formData[inputName];
+            }
         }
         super.open();
         this._popupValidator.enableValidation();

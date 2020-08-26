@@ -39,6 +39,16 @@ class Popup {
 
         document.addEventListener('keydown', this._handleEscClose.bind(this));
     }
+
+    setLoading() {
+        this._submitButton = this._popupSelector.querySelector('.popup__submit-button')
+        this._submitButton.textContent = 'Сохранение...';
+        this._submitButton.disabled = true;
+    }
+
+    setDefaultButton() {
+        this._submitButton.disabled = false;
+    }
 }
 
 export {Popup};

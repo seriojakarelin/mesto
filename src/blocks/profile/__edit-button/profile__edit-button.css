@@ -11,9 +11,6 @@
     background-image: url(../../../images/edit__button.svg);
     background-position: center;
     background-repeat: no-repeat;
-    padding: 0;
-    border: 1px solid #fff;
-    outline: none;
 }
 
 @media screen and (max-width: 960px) {

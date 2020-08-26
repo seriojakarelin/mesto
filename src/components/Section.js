@@ -11,9 +11,13 @@ class Section {
         });
     }
 
-    addItem(item) {
+    addItem(item, append = false) {
         const element = this._renderer(item);
-        this._container.prepend(element);
+        if(append) {
+            this._container.append(element);
+        }else {
+            this._container.prepend(element);
+        }
     }
 }
 

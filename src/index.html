@@ -14,11 +14,13 @@
         <main class="content">
 
             <section class="profile">
-                <img class="profile__avatar" src="./images/custeau.jpg" alt="Фото Жака-Ива Кусто">
+                <div class="profile__avatar">
+                    <button class="profile__avatar-edit-button" type="button"></button>
+                </div>
                 <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <h1 class="profile__name"></h1>
                     <button class="button profile__edit-button" type="button"></button>
-                    <p class="profile__job">Исследователь океана</p>
+                    <p class="profile__job"></p>
                 </div>
                 <button class="button profile__add-button" type="button"></button>
             </section>
@@ -69,6 +71,28 @@
             </div>
         </section>
 
+        <section class="popup popup_type_delete">
+            <div class="popup__container_type_delete popup__container">
+                <button class="popup__close-button popup__close-button_type_delete button" type="button"></button>
+                <h2 class="popup__title popup__title_type_delete">Вы уверены?</h2>
+                <form class="popup__forms popup__forms_type_delete" name="popup-forms" novalidate>
+                    <button class="popup__submit-button popup__submit-button_type_delete" type="submit">Да</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="popup popup_type_avatar">
+            <div class="popup__container_type_avatar popup__container">
+                <button class="popup__close-button popup__close-button_type_avatar button" type="button"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__forms popup__forms_type_avatar" name="popup-forms" novalidate>
+                    <input id="user-avatar-input" type="url" class="popup__input popup__input_el_user-avatar" name="user-avatar" placeholder="Ссылка на картинку" required>
+                    <span id="user-avatar-input-error" class="popup__input-error"></span>
+                    <button class="popup__submit-button popup__submit-button_type_avatar" type="submit">Сохранить</button>
+                </form>
+            </div>
+        </section>
+
     </div>
 
     <template class="card-template">
@@ -78,7 +102,10 @@
             <img class="gallery__photo">
             <div class="gallery__info-container">
                 <h2 class="gallery__photo-title"></h2>
-                <button class="gallery__like-button button" type="button"></button>
+                <div class="gallery__like-container">
+                    <button class="gallery__like-button button" type="button"></button>
+                    <p class="gallery__like-number"></p>
+                </div>
             </div>
         </li>
         
