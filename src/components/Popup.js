@@ -1,6 +1,7 @@
 class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
+        this._submitButton = this._popupSelector.querySelector('.popup__submit-button')
         this.setEventListeners();
     }
 
@@ -41,13 +42,13 @@ class Popup {
     }
 
     setLoading() {
-        this._submitButton = this._popupSelector.querySelector('.popup__submit-button')
         this._submitButton.textContent = 'Сохранение...';
         this._submitButton.disabled = true;
     }
 
-    setDefaultButton() {
+    setDefaultButton(title) {
         this._submitButton.disabled = false;
+        this._submitButton.textContent = title;
     }
 }
 

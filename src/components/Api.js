@@ -57,11 +57,10 @@ class Api {
         })
     }
 
-    putItem(id, item) {
-        return fetch(`${this._url}${id}`, {
+    putItem(item) {
+        return fetch(`${this._url}${item._id}`, {
             method: 'PUT',
             headers: this._headers,
-            body: JSON.stringify(item)
         })
         .then(res => {
             if (res.ok) {

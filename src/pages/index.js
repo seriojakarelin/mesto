@@ -36,8 +36,16 @@ const cardsApi = new Api({
     }
 });
 
-const idCardApi = new Api({
+const deleteCardApi = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-14/cards/', 
+    headers: {
+        authorization: '3264da94-6a0d-46bd-9eaf-c8758f7396fd',
+        'Content-Type': 'application/json'
+    }
+});
+
+const likeApi = new Api({
+    url: 'https://mesto.nomoreparties.co/v1/cohort-14/cards/likes/', 
     headers: {
         authorization: '3264da94-6a0d-46bd-9eaf-c8758f7396fd',
         'Content-Type': 'application/json'
@@ -48,21 +56,24 @@ Promise.all([
     userApi.getItems(),
     cardsApi.getItems()
 ])
-.then(([user, cards]) => {
-    cards.forEach((card) => {
-        cardList.addItem({
-            _id: card._id,
-            link: card.link,
-            name: card.name,
-            likes: card.likes,
-            isOwn: card.owner._id === user._id
-        }, true)
+    .then(([user, cards]) => {
+        userInfo.setUserInfo(user);
+        cards.forEach((card) => {
+            cardList.addItem({
+                _id: card._id,
+                link: card.link,
+                name: card.name,
+                likes: card.likes,
+                isOwn: card.owner._id === user._id,
+                hasBeenLiked: card.likes.some((user) => {
+                    return user._id == userInfo.getUserInfo().id 
+                })
+            }, true)
+        })
     })
-    userInfo.setUserInfo(user);
-})
-.catch((err) => {
-    console.log(err);
-})
+    .catch((err) => {
+        console.log(err);
+    })
 
 const popupEditValidator = new FormValidator(popupFormsEdit, popupEdit, formSelectors);
 const popupAddValidator = new FormValidator(popupFormsAdd, popupAdd, formSelectors);
@@ -85,7 +96,7 @@ const cardList = new Section({
             (cardToBeDeleted) => {
                 popupWithSubmitDelete.setSubmitAction(() => {
                     popupWithSubmitDelete.setLoading();
-                    idCardApi.deleteItem(cardToBeDeleted._id)
+                    deleteCardApi.deleteItem(cardToBeDeleted._id)
                         .then(res => {
                             cardToBeDeleted.trashSubmit();
                             popupWithSubmitDelete.setDefaultButton();
@@ -96,8 +107,30 @@ const cardList = new Section({
                 });
                 popupWithSubmitDelete.open();
             },
+            (cardToBeLiked) => {
+                if (cardToBeLiked._likes.some((user) => { return user._id == userInfo.getUserInfo().id })) {
+                    likeApi.deleteItem(cardToBeLiked._id)
+                        .then((res) => {
+                            cardToBeLiked.setLikes(res.likes);
+                            cardToBeLiked.handleLikeButton();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                } else {
+                    likeApi.putItem(cardToBeLiked) 
+                        .then((res) => {
+                            cardToBeLiked.setLikes(res.likes);
+                            cardToBeLiked.handleLikeButton();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+            },
             item.likes,
-            item.isOwn);
+            item.isOwn, 
+            item.hasBeenLiked);
         const cardElement = card.generateTemplate();
 
         return cardElement;
@@ -111,15 +144,13 @@ const popupWithFormEdit = new PopupWithForm(
             name: formInfo['user-name'], 
             about: formInfo['user-job'] 
         }
-        userApi.changeItem(item)
-        .then(item => {
-            userInfo.setUserInfo(item);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        return userApi.changeItem(item)
+    },
+    (res) => {
+        userInfo.setUserInfo(res);
     }, 
-    popupEditValidator
+    popupEditValidator, 
+    'Сохранить'
 );
 
 const popupWithFormAdd = new PopupWithForm(
@@ -129,21 +160,22 @@ const popupWithFormAdd = new PopupWithForm(
             name: formInfo['place-name'], 
             link: formInfo['place-url']
         }
-        cardsApi.createItem(item)
-        .then((res) => {
-            cardList.addItem({
-                _id: res._id,
-                name: res.name,
-                link: res.link,
-                likes: res.likes,
-                isOwn: res.owner._id === userInfo.getUserInfo().id
-            }); 
-        })
-        .catch((err) => {
-            console.log(err);
+        return cardsApi.createItem(item)
+    },
+    (res) => {
+        cardList.addItem({
+            _id: res._id,
+            name: res.name,
+            link: res.link,
+            likes: res.likes,
+            isOwn: res.owner._id === userInfo.getUserInfo().id,
+            hasBeenLiked: res.likes.some((user) => { 
+                return user._id == userInfo.getUserInfo().id 
+            })
         })
     },
-    popupAddValidator
+    popupAddValidator, 
+    'Создать'
 );
 
 const popupWithFormAvatar = new PopupWithForm(
@@ -152,16 +184,14 @@ const popupWithFormAvatar = new PopupWithForm(
         const item = {
             avatar: formInfo['user-avatar']
         }
-        userAvatarApi.changeItem(item)
-        .then((res) => {
-            userInfo.setUserInfo(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        return userAvatarApi.changeItem(item)
     },
-    popupAvatarValidator
-)
+    (res) => {
+        userInfo.setUserInfo(res);
+    },
+    popupAvatarValidator,
+    'Сохранить'
+);
 
 profileEditButton.addEventListener('click', () => { 
     popupWithFormEdit.open(userInfo.getUserInfo(), 'user');
