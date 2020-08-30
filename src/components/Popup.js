@@ -8,11 +8,16 @@ class Popup {
     open() {
         this._popupSelector.classList.add('popup_opened');
         document.activeElement.blur();
+        this._setEscListener();
     }
 
     close() {
         this._popupSelector.classList.remove('popup_opened');
         document.removeEventListener('keydown', this._handleEscClose.bind(this));
+    }
+
+    _setEscListener() {
+        document.addEventListener('keydown', this._handleEscClose.bind(this));
     }
 
     _handleEscClose(evt) {
@@ -37,8 +42,6 @@ class Popup {
         this._popupSelector.addEventListener('click', (evt) => {
             this._handleOverlayClose(evt);
         });
-
-        document.addEventListener('keydown', this._handleEscClose.bind(this));
     }
 
     setLoading() {
